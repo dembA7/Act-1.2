@@ -9,6 +9,7 @@
 // All Rights Reserved. May be reproduced for any non-commercial
 // purpose.
 // =================================================================
+
 #ifndef SEARCH_H
 #define SEARCH_H
 
@@ -23,14 +24,18 @@
 // @return the index of the searched element, -1 in case the element
 //		   is not found in the vector.
 // =================================================================
+
 template <class T>
-int sequentialSearch(const std::vector<T> &v, T key) {
+std::pair<int, int>
+sequentialSearch(const std::vector<T> &v, T key) {
+  int kSs = 0;
 	for (int i = 0; i < v.size(); i++) {
+    kSs++;
 		if (v[i] == key) {
-			return i;
+			return std::make_pair(i, kSs);
 		}
 	}
-	return -1;
+	return std::make_pair(-1, kSs);
 }
 
 // =================================================================
@@ -41,23 +46,27 @@ int sequentialSearch(const std::vector<T> &v, T key) {
 // @return the index of the searched element, -1 in case the element
 //		   is not found in the vector.
 // =================================================================
+
 template <class T>
-int binarySearch(const std::vector<T> &v, T key) {
+std::pair<int, int>
+binarySearch(const std::vector<T> &v, T key) {
 	int low, high, mid;
+  int kBs = 0;
 
 	low = 0;
 	high = v.size() - 1;
 	while (low <= high) {
+    kBs++;
 		mid = low + ((high - low) / 2); // mid = (high + low) / 2;
 		if (key == v[mid]) {
-			return mid;
+			return std::make_pair(mid, kBs);
 		} else if (key < v[mid]) {
 			high = mid - 1;
 		} else {
 			low = mid + 1;
 		}
 	}
-	return -1;
+	return std::make_pair(-1, kBs);
 }
 
 // =================================================================
@@ -70,6 +79,7 @@ int binarySearch(const std::vector<T> &v, T key) {
 // @return the index of the searched element, -1 in case the element
 //		   is not found in the vector.
 // =================================================================
+
 template <class T>
 int binaryRSearch(const std::vector<T> &v, int low, int high, T key) {
 	int mid;
@@ -86,6 +96,7 @@ int binaryRSearch(const std::vector<T> &v, int low, int high, T key) {
 			return binaryRSearch(v, mid + 1, high, key);
 		}
 	}
+  return -1;
 }
 
 #endif /* SEARCH_H */
