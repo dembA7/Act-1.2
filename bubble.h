@@ -9,6 +9,7 @@
 // All Rights Reserved. May be reproduced for any non-commercial
 // purpose.
 // =================================================================
+
 #ifndef BUBBLE_H
 #define BUBBLE_H
 
@@ -21,6 +22,7 @@
 // @param A, an array of T elements.
 // @param size, the number of elements in the array.
 // =================================================================
+
 template <class T>
 void bubbleSort(T *arr, int size) {
 	for(int i = size - 1; i > 0; i--){
@@ -37,15 +39,19 @@ void bubbleSort(T *arr, int size) {
 //
 // @param v, a vector of T elements.
 // =================================================================
+
 template <class T>
-void bubbleSort(std::vector<T> &v) {
+int bubbleSort(std::vector<T> &v) {
+  int kBs = 0;
 	for(int i = v.size() - 1; i > 0; i--){
 		for(int j = 0; j < i; j++){
 			if(v[j] > v[j + 1]){
 				swap(v, j, j + 1);
+        kBs++;
 			}
 		}
 	}
+  return kBs;
 }
 
 #endif /* BUBBLE_H */
